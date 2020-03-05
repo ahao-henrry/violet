@@ -1,0 +1,17 @@
+package com.ahao.violet;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+// @RunWith(SpringJUnit4ClassRunner.class)
+// @SpringBootTest(classes = VioletApplication.class)
+public class VioletApplicationTests {
+
+    @Test
+    public void contextLoads() {
+        System.out.println(String.format("%08X", 1234));
+    }
+
+}
