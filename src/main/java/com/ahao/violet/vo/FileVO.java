@@ -12,6 +12,7 @@ public class FileVO extends BaseVO {
     private String fileName;
     private String fileFullPath;
     private String fileRealName;
+    private String fileUrl;
 
     public Integer getId() {
         return id;
@@ -51,5 +52,13 @@ public class FileVO extends BaseVO {
 
     public void setFileRealName(String fileRealName) {
         this.fileRealName = fileRealName;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }

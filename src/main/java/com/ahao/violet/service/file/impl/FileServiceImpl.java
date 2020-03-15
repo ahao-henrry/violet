@@ -21,6 +21,9 @@ public class FileServiceImpl implements IFileService {
     @Value("${violet.img.path}")
     private String imgPath;
 
+    @Value("${violet.img.url}")
+    private String imgUrl;
+
     @Autowired
     private FileMapper fileMapper;
 
@@ -62,6 +65,7 @@ public class FileServiceImpl implements IFileService {
         fileVO.setFileName(fileName);
         fileVO.setFileFullPath(fileFullPath);
         fileVO.setFileRealName(fileRealName);
+        fileVO.setFileUrl(imgUrl + fileName);
 
         fileMapper.addFile(fileVO);
     }

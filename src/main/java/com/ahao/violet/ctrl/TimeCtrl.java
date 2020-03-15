@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class TimeCtrl {
 
     @GetMapping("/time")
-    public String rootMapping() {
+    public String time() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

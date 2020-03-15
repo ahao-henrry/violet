@@ -5,13 +5,18 @@
 <mapper namespace="com.ahao.violet.dao.file.FileMapper">
 
     <insert id="addFile" parameterType="com.ahao.violet.vo.FileVO">
-        INSERT INTO file_t (fileId, fileName, fileFullPath, fileRealName)
+        INSERT INTO file_t (fileId, fileName, fileFullPath, fileRealName, fileUrl)
         VALUES
         (
             #{fileId, jdbcType=VARCHAR},
             #{fileName, jdbcType=VARCHAR},
             #{fileFullPath, jdbcType=VARCHAR},
-            #{fileRealName, jdbcType=VARCHAR}
+            #{fileRealName, jdbcType=VARCHAR},
+            #{fileUrl, jdbcType=VARCHAR}
         )
     </insert>
+
+    <select id="search" parameterType="String" resultType="com.ahao.violet.vo.FileVO">
+        SELECT * FROM file_t
+    </select>
 </mapper>
