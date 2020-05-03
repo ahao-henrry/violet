@@ -14,6 +14,6 @@ public interface IFileService {
      * @param file
      * @return
      */
-    boolean saveImage(MultipartFile file);
+    String saveImage(MultipartFile file);
 
 }

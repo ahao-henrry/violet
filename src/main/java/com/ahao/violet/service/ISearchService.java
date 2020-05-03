@@ -1,6 +1,7 @@
 package com.ahao.violet.service;
 
 import com.ahao.violet.vo.FileVO;
+import com.ahao.violet.vo.TextVO;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ import java.util.List;
 public interface ISearchService {
 
     List<FileVO> search(String key);
+
+    TextVO searchOne(String key);
 }

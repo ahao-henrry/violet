@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahao.violet.dao.file.TextMapper">
+
+    <resultMap id="TextResultMap" type="com.ahao.violet.vo.TextVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="text_info" jdbcType="LONGVARCHAR" property="textInfo"/>
+        <result column="file_id" jdbcType="VARCHAR" property="fileId"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.ahao.violet.vo.TextVO">
+        INSERT INTO text_t (file_id, text_info, create_time, update_time, del_flag)
+        VALUES
+        (
+            #{fileId, jdbcType=VARCHAR},
+            #{textInfo, jdbcType=VARCHAR},
+            now(),
+            now(),
+            0
+        )
+    </insert>
+
+    <select id="searchOne" resultMap="TextResultMap">
+        SELECT * FROM text_t AS t1
+        JOIN ( SELECT ROUND(RAND()*((SELECT MAX(id) FROM text_t)-(SELECT MIN(id) FROM text_t))+(SELECT MIN(id) FROM text_t)) AS id ) AS t2
+        where t1.id >= t2.id ORDER BY t1.id LIMIT 1;
+    </select>
+</mapper>

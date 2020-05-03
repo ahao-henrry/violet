@@ -2,12 +2,12 @@ package com.ahao.violet.ctrl;
 
 import com.ahao.violet.service.ISearchService;
 import com.ahao.violet.vo.FileVO;
+import com.ahao.violet.vo.TextVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author ahao
@@ -21,5 +21,10 @@ public class SearchCtrl {
     @GetMapping("/search")
     public List<FileVO> search(String key) {
         return iSearchService.search(key);
+    }
+
+    @GetMapping("/search/one")
+    public TextVO searchOne(String key) {
+        return iSearchService.searchOne(key);
     }
 }

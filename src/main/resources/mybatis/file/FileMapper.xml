@@ -4,19 +4,64 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ahao.violet.dao.file.FileMapper">
 
+    <resultMap id="TextResultMap" type="com.ahao.violet.vo.TextVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="text_info" jdbcType="LONGVARCHAR" property="textInfo"/>
+        <result column="file_id" jdbcType="VARCHAR" property="fileId"/>
+    </resultMap>
+
+    <resultMap id="FileResultMap" type="com.ahao.violet.vo.FileVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="file_id" jdbcType="VARCHAR" property="fileId"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_full_path" jdbcType="VARCHAR" property="fileFullPath"/>
+        <result column="file_real_name" jdbcType="VARCHAR" property="fileRealName"/>
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+
     <insert id="addFile" parameterType="com.ahao.violet.vo.FileVO">
-        INSERT INTO file_t (fileId, fileName, fileFullPath, fileRealName, fileUrl)
+        INSERT INTO file_t (file_id, file_name, file_full_path, file_real_name, file_url, remark, create_time,
+        update_time, del_flag)
         VALUES
         (
             #{fileId, jdbcType=VARCHAR},
             #{fileName, jdbcType=VARCHAR},
             #{fileFullPath, jdbcType=VARCHAR},
             #{fileRealName, jdbcType=VARCHAR},
-            #{fileUrl, jdbcType=VARCHAR}
+            #{fileUrl, jdbcType=VARCHAR},
+            #{remark, jdbcType=LONGVARCHAR},
+            now(),
+            now(),
+            0
         )
     </insert>
 
-    <select id="search" parameterType="String" resultType="com.ahao.violet.vo.FileVO">
+    <update id="update" parameterType="com.ahao.violet.vo.TextVO">
+        update file_t set remark=#{remark, jdbcType=LONGVARCHAR},update_time=now() where
+        file_id=#{fileId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="search" parameterType="String" resultMap="FileResultMap">
         SELECT * FROM file_t
+    </select>
+
+    <select id="searchByFileId" parameterType="String" resultMap="FileResultMap">
+        SELECT * FROM file_t where file_id=#{fileId}
+    </select>
+
+    <!--<select id="searchOne" resultMap="FileResultMap">
+        SELECT * FROM file_t AS t1
+        JOIN (
+            SELECT ROUND(RAND()*((SELECT MAX(id) FROM file_t)-(SELECT MIN(id) FROM file_t))+(SELECT MIN(id) FROM file_t)) AS id
+        ) AS t2
+        WHERE t1.id >= t2.id
+        ORDER BY t1.id LIMIT 1
+    </select>-->
+
+    <select id="searchTextOne" resultMap="TextResultMap">
+        SELECT * FROM text_t AS t1
+        JOIN ( SELECT ROUND(RAND()*((SELECT MAX(id) FROM text_t)-(SELECT MIN(id) FROM text_t))+(SELECT MIN(id) FROM text_t)) AS id ) AS t2
+        where t1.id >= t2.id ORDER BY t1.id LIMIT 1;
     </select>
 </mapper>

@@ -28,7 +28,7 @@ public class FileServiceImpl implements IFileService {
     private FileMapper fileMapper;
 
     @Override
-    public boolean saveImage(MultipartFile multipartFile) {
+    public String saveImage(MultipartFile multipartFile) {
         String fileRealName = multipartFile.getOriginalFilename();
         File fileFullPath = new File(imgPath);
         if (!fileFullPath.exists()) {
@@ -36,13 +36,13 @@ public class FileServiceImpl implements IFileService {
         }
 
         try {
-            saveImage(multipartFile, imgPath, fileRealName);
-            return true;
+            String fileId = saveImage(multipartFile, imgPath, fileRealName);
+            return fileId;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -52,7 +52,7 @@ public class FileServiceImpl implements IFileService {
      * @param fileRealName
      * @throws IOException
      */
-    private void saveImage(MultipartFile multipartFile, String fileFullPath, String fileRealName) throws IOException {
+    private String saveImage(MultipartFile multipartFile, String fileFullPath, String fileRealName) throws IOException {
         String fileType = fileRealName.substring(fileRealName.lastIndexOf("."));
         String fileId = UUID.randomUUID().toString().replaceAll("-", "");
         String fileName = fileId + fileType;
@@ -68,5 +68,6 @@ public class FileServiceImpl implements IFileService {
         fileVO.setFileUrl(imgUrl + fileName);
 
         fileMapper.addFile(fileVO);
+        return fileId;
     }
 }

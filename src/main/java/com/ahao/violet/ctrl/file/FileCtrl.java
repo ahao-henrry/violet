@@ -26,12 +26,12 @@ public class FileCtrl {
             return "something is wrong";
         }
 
-        boolean isSuccess = iFileService.saveImage(file);
-        if (!isSuccess) {
+        String fileId = iFileService.saveImage(file);
+        if (null == fileId) {
             return "something is wrong";
         }
 
-        return "suc";
+        return fileId;
     }
 
     @GetMapping("/download")

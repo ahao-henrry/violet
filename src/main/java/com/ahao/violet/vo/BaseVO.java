@@ -14,6 +14,15 @@ public class BaseVO implements Serializable {
     private LocalDateTime updateTime;
     private String createUser;
     private String updateUser;
+    private Integer delFlag;
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
