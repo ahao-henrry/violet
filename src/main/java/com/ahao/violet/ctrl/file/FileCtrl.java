@@ -22,8 +22,10 @@ public class FileCtrl {
         }
 
         String fileName = file.getOriginalFilename();
-        if (!fileName.contains(".jpg") && !fileName.contains(".png")) {
-            return "something is wrong";
+        if (!fileName.contains(".jpeg") && !fileName.contains(".png")
+                && !fileName.contains(".jpg") && !fileName.contains(".bmp")
+                && !fileName.contains(".gif")) {
+            return "only surport .jpg,.jpeg,.png,.bmp,.gif";
         }
 
         String fileId = iFileService.saveImage(file);

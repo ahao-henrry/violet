@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author ahao
  * @since 2019/11/18 下午6:40
@@ -27,9 +30,11 @@ public class RootCtrl {
     }
 
     @PostMapping("/upload/text")
-    public String uploadText(@RequestBody TextVO textVO) {
+    public Map<String, String> uploadText(@RequestBody TextVO textVO) {
         String s = iRootService.uploadText(textVO);
 
-        return "\"name\":\"ahao\"";
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "ahao");
+        return map;
     }
 }

@@ -11,7 +11,7 @@ function uploadFile() {
         processData: false,
         contentType: false,
         success: function (ret) {
-            alert(ret);
+            $('#fileUploadTip').text('upload suc.');
             $('#uploadFile').data("fileId", ret);
         }
     });
@@ -26,11 +26,13 @@ function uploadText() {
         type: 'POST',
         url: "upload/text",
         data: JSON.stringify(textVO),
-        dataType: 'application/json',
+        dataType: 'json',
         contentType: 'application/json',
         success: function (ret) {
-            let ad = JSON.stringify(ret);
-            alert(ad);
+            $('#textUploadTip').text('upload suc.');
+        },
+        error(xhr, status, error){
+            $('#textUploadTip').text(error);
         }
     });
 }
