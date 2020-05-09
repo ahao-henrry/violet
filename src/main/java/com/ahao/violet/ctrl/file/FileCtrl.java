@@ -28,12 +28,7 @@ public class FileCtrl {
             return "only surport .jpg,.jpeg,.png,.bmp,.gif";
         }
 
-        String fileId = iFileService.saveImage(file);
-        if (null == fileId) {
-            return "something is wrong";
-        }
-
-        return fileId;
+        return iFileService.saveImage(file);
     }
 
     @GetMapping("/download")
