@@ -92,7 +92,7 @@ public class FileServiceImpl implements IFileService {
                 System.out.println(orientation);
             }
             int angle = 0;
-            if (6 == orientation) {
+            if (6 == orientation || 1 == orientation) {
                 //6旋转90
                 angle = 90;
             } else if (3 == orientation) {
